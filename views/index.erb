@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>chatterBox</title>
+		<meta charset="UTF-8"/>
+		<link rel="stylesheet" href="css/index.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	</head>
+	<body>
+		<header>
+			<h1><a href="/">chatter<span style="color:red">Box</span></a></h1>
+			<h3><a href="account">account</a></h3>
+			<h3 id="signinh3"><a href="#" onclick="return false;">sign in</a></h3>
+			<h3 id="signuph3"><a href="#" onclick="return false;">sign up</a></h3>
+		</header>
+		<!-- the header should be the same for account.erb -->
+		<hr>
+		<!-- there needs to be a form for signing in here, it should only require username and password -->
+		<form id="signup_popup" method="POST" action="/signup">
+			<span style="font-family:Tahoma">
+				<b>full name:</b><br>
+				<input type="text" name="full_name"><br><br>
+				<b>username:</b><br>
+				<input type="text" name="username"><br><br>
+				<b>150 characters about yourself:</b><br>
+				<textarea name="bio" maxlength="150" rows="4"></textarea><br><br>
+				<b>password:</b><br>
+				<input type="text" name="password">
+			</span><br><br>
+			<button id="submit_button" type="submit" formaction="/signup"><span style="font-family:Tahoma; color:white">
+				<b>sign up</b>
+			</span></button>
+			<button id="exit_button" type="button" value="hello!"><span style="font-family:Tahoma; color:white">
+				<b>exit</b>
+			</span></button>
+		</form>
+		<!-- I've made it so that anyone can make multiple users/accounts, partially for testing and partially for fun -->
+		<form id="chatit" method="POST" action="/newpost">
+			<textarea name="postcontent" maxlength="150"></textarea><br>
+			<input type="submit" name="submitpost">
+		</form>
+		<ul id="feed">
+			<!-- where users' posts go, the code for this should be in the #chatit submit event listener -->
+		</ul>
+		<script>
+			$(document).ready(function(){
+				$("#signin_popup").hide();
+				$("#signup_popup").hide();
+				$("#signinh3").click(function(){
+					$("#signin_popup").show();
+				});
+				$("#signuph3").click(function(){
+					$("#signup_popup").show();
+				});
+				$("#exit_button").click(function() {
+					$("#signup_popup").hide();
+				});
+				$("#chatit").submit(function(event) {
+					event.preventDefault();
+					var the_date = new Date();
+					$.ajax({
+						url: "/newpost", 
+						method: "POST",
+						data: {
+							content: $("textarea[name='postcontent']").val()
+						}
+					}).done(function(data) {
+						console.log(data)
+						//add a new <div> with the data from the Post created
+					});
+				});
+				$("#signin_popup").submit(function() {
+					event.preventDefault();
+				});
+				$("#signup_popup").submit(function() {
+					event.preventDefault();
+					$.ajax({
+						url: "/signup",
+						method: "POST",
+						data: {
+							full_name: $("input[name='full_name']").val(),
+							username: $("input[name='username']").val(),
+							bio: $("input[name='bio']").val(),
+							password: $("input[name='password']").val()
+						}
+					}).done(function(data) {
+						console.log(data)
+					});
+				});
+			});
+		</script>
+	</body>
+</html>

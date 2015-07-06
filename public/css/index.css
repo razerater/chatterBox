@@ -1,0 +1,90 @@
+* {
+	margin:0px;
+}
+h1 {
+	font-family:Tahoma;
+	margin:10px 10px 10px 20px;
+	display:inline-block;
+}
+h1 a {
+	color:black;
+	text-decoration:none;
+}
+h3 {
+	font-family:Tahoma;
+	margin:20px 50px 10px 0px;
+	float:right;
+	display:inline-block;
+}
+h3 a {
+	color:black;
+	text-decoration:none;
+}
+h3 a:hover {
+	color:gray;
+}
+hr {
+	border:1px dashed darkgray;
+	background-color:lightgray;
+}
+#feed {
+	list-style-type:none;
+}
+#signin_popup {
+	position:absolute;
+	top:150px;
+	left:37%;
+	width:250px;
+	border:1px solid darkgray;
+	background-color:white;
+	border-radius:10px;
+	padding:12px;
+	box-shadow: 5px 5px 5px gray;
+	/*display:none;*/
+}
+#signup_popup {
+	position:absolute;
+	top:150px;
+	left:37%;
+	width:250px;
+	border:1px solid darkgray;
+	background-color:white;
+	border-radius:10px;
+	padding:12px;
+	box-shadow: 5px 5px 5px gray;
+	/*display:none;*/
+	/*Setting the "visibility" porperty to "hidden" would be less desirable since it would still be in the DOM and potentially block anything behind it, whereas setting the "display" property to "none" actually removes it from the DOM.*/
+}
+form#signin_popup input:not(#submit_button) {
+	border:1px solid lightgray;
+	margin-top:10px;
+	width:245px;
+}
+#signup_popup input:not(#submit_button), textarea[name='bio'] {
+	border:1px solid lightgray;
+	margin-top:10px;
+	width:245px;
+}
+form button#submit_button {
+	margin-right:1px;
+	padding:6px;
+	width:118px;
+	border-radius:3px;
+}
+form button#exit_button {
+	margin-right:1px;
+	padding:6px;
+	width:118px;
+	border-radius:3px;
+	float:right;
+}
+textarea {
+	resize:none;
+}
+textarea[name='postcontent'] {
+	margin:10px;
+	border:1px solid darkgray;
+	border-radius:5px;
+	width:200px;
+	height:80px;
+}
